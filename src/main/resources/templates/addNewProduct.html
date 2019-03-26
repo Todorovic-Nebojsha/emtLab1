@@ -1,0 +1,72 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Devices Shop</title>
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap.min.css">
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+    <script src="/assets/vendor/popper.min.js"></script>
+    <script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
+</head>
+<body>
+<main>
+    <div class="container">
+        <form id='form' class="form" method="post" action="http://localhost:8080/product">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" type="name" class="form-control" name="name" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input id="description" class="form-control" type="description" name="description" placeholder="Enter description">
+            </div>
+
+            <div class="form-group">
+                <label for="imageLink">Image Link:</label>
+                <input id="imageLink" class="form-control" type="imageLink" name="imageLink" placeholder="Enter image Link">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" >
+                    <option th:each="category : ${categoryList}" th:value="${category.name}" th:text="${category.name}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="manufacturer">Manufacturer</label>
+                <select id="manufacturer" name="manufacturer" >
+                    <option th:each="manufacturer : ${manufacturerList}" th:value="${manufacturer.name}" th:text="${manufacturer.name}"></option>
+                </select>
+            </div>
+
+            <h1 id="errorDiv" style="display:none" class="text-danger">
+                Please enter all the information!!!
+            </h1>
+            <button id='submit' type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</main>
+
+</body>
+<script>
+    var submitBtn=document.getElementById('submit');
+    submitBtn.addEventListener('click',function(event){
+
+        var name = document.getElementById('name');
+        var description = document.getElementById('description');
+        var imageLink = document.getElementById('imageLink');
+        var category=document.getElementById('category');
+        var manufacturer=document.getElementById('manufacturer');
+        var forma=document.getElementById('form');
+
+        if(name.value===''||description.value===''
+            ||imageLink.value===''||category.value===''
+            ||manufacturer.value===''){
+            event.preventDefault();
+            document.getElementById('errorDiv').style.display = "block";
+        }
+    });
+
+</script>
+</html>
